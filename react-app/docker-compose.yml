@@ -1,0 +1,27 @@
+version: '1'
+#ejecucion de este pauqte docker-compose up
+services:
+  db:  
+    image: postgres:9.6    
+    restart: always
+    network_mode: "host"
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "reactexpressjs"
+      POSTGRES_PASSWORD: "secret"
+
+    container_name: "basedatos"
+    volumes: 
+      - ./postgres:/var/lib/postgresql/data
+
+  app:
+    image: node:16-alpine
+    volumes:
+      - ./:/app:cached
+    working_dir: /app
+    ports:
+      - 3000:3000
+    command: npm start
+    tty: true
+            

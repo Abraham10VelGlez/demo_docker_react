@@ -1,0 +1,17 @@
+version: '1'
+#ejecucion de este pauqte docker-compose up
+services:
+  db:  
+    image: postgres:9.6    
+    restart: always
+    network_mode: "host"
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "ejemplos"
+      POSTGRES_PASSWORD: "secret"
+
+    container_name: "db"
+    volumes: 
+      - ./postgres:/var/lib/postgresql/data
+            
